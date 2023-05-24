@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/24 17:18:38 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/24 19:21:17 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	check_int(char **argv, int argc)
 
 int	main(int argc, char **argv)
 {
+	// t_list stack_a;
+
 	if (argc == 1)
 	{
 		ft_printf("Error\n");

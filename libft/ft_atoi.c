@@ -6,11 +6,13 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:12:16 by mlongo            #+#    #+#             */
-/*   Updated: 2023/04/04 19:12:32 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/24 19:21:39 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
+#include <stdio.h>
 
 int static	ft_sign(char c)
 {
@@ -27,7 +29,7 @@ int	ft_atoi(const char *nptr)
 {
 	char	*p;
 	int		s;
-	int		r;
+	long	r;
 
 	p = (char *) nptr;
 	s = 1;
@@ -44,6 +46,11 @@ int	ft_atoi(const char *nptr)
 	{
 		r *= 10;
 		r += *(p++) - 48;
+	}
+	if ((r * s) > INT_MAX || (r * s) < INT_MIN)
+	{
+		printf("Error\n");
+		exit (1);
 	}
 	return (r * s);
 }
