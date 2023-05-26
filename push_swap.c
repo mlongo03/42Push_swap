@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/26 18:27:44 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/26 18:54:41 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,37 @@
 
 void	ft_error(void)
 {
+	ft_printf("Error");
+	exit(1);
+}
+
+void	ft_free1(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
+void	delete_list(t_listlink *stack_a)
+{
+	
+}
+
+void	ft_error(char **helper, t_listlink stack_a, int flag)
+{
+	if (flag == 1)
+	{
+		(void)stack_a;
+		ft_free1(helper);
+	}
+	else
+	{
+
+		ft_free1(helper);
+	}
 	ft_printf("Error");
 	exit(1);
 }
@@ -39,8 +70,6 @@ void	check_duplicates(t_listlink stack_a, int argc)
 		j = i;
 		while (j < argc - 2)
 		{
-			// printf("j :%d\nargc :%d\ni :%d\n", j, argc - 1, i);
-			// ft_printf("seen[i] = %d\nseen[j + 1] = %d\n", seen[i], seen[j + 1]);
 			if (seen[i] == seen[j + 1])
 				ft_error();
 			j++;
@@ -49,32 +78,7 @@ void	check_duplicates(t_listlink stack_a, int argc)
 	}
 }
 
-// void	check_int(t_listlink stack_a, int argc)
-// {
-// 	int i;
-
-// 	i = 1;
-// 	while (stack_a.index != argc - 1)
-// 	{
-// 		while(*(char *)stack_a.content)
-// 		{
-// 			if (*(char *)stack_a.content != '-' && *(char *)stack_a.content != '+')
-// 				if (*(char *)stack_a.content < 49 || *(char *)stack_a.content > 57)
-// 					ft_error();
-// 			stack_a.content++;
-// 		}
-// 		stack_a = *stack_a.next;
-// 	}
-// 	while(*(char *)stack_a.content)
-// 	{
-// 		if (*(char *)stack_a.content != '-' && *(char *)stack_a.content != '+')
-// 			if (*(char *)stack_a.content < 49 || *(char *)stack_a.content > 57)
-// 				ft_error();
-// 		stack_a.content++;
-// 	}
-// }
-
-void	check_int(char **helper)
+void	check_int(char **helper, t_listlink *stack_a, int flag)
 {
 	int	i;
 	int	j;
@@ -88,7 +92,7 @@ void	check_int(char **helper)
 		{
 			if (helper[i][j] != '-' && helper[i][j] != '+')
 				if (helper[i][j] < 49 || helper[i][j] > 57)
-					ft_error();
+					ft_error1(helper, stack_a, flag); //free helper o free helper e stack
 			j++;
 		}
 		i++;
@@ -108,7 +112,7 @@ t_listlink	*create_stack_a(char **argv, int argc)
 	j = 0;
 	index = 0;
 	helper = ft_split(argv[i++], ' ');
-	check_int(helper);
+	check_int(helper, stack_a, 1);
 	stack_a = ft_lstnew(helper[j], j + 1);
 	j++;
 	while (helper[j])
@@ -117,11 +121,12 @@ t_listlink	*create_stack_a(char **argv, int argc)
 		ft_lstadd_back(&stack_a, tmp);
 		j++;
 	}
+	//free helper
 	index = j;
 	while (i < argc)
 	{
 		helper = ft_split(argv[i++], ' ');
-		check_int(helper);
+		check_int(helper, stack_a, 2);
 		j = 0;
 		while (helper[j])
 		{
@@ -130,6 +135,7 @@ t_listlink	*create_stack_a(char **argv, int argc)
 			j++;
 			index++;
 		}
+		//free helper
 	}
 	stack_a->before = ft_lstlast(stack_a);
 	ft_lstlast(stack_a)->next = stack_a;
