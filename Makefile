@@ -6,7 +6,7 @@
 #    By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/05/24 16:20:14 by mlongo           ###   ########.fr        #
+#    Updated: 2023/05/26 15:20:10 by mlongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
+	@make bonus -C libft
 	@make -C ft_printf
 	@cc $(OBJS) ${LIBFT} $(FT_PRINTF) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"

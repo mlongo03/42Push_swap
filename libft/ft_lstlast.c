@@ -6,13 +6,13 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:58:22 by mlongo            #+#    #+#             */
-/*   Updated: 2023/04/05 13:47:56 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:42:28 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_listlink	*ft_lstlast(t_listlink *lst)
 {
 	if (!lst)
 		return (NULL);
