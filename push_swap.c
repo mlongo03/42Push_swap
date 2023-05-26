@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/26 18:06:11 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/26 18:27:44 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,22 @@ void	check_duplicates(t_listlink stack_a, int argc)
 	int seen[argc - 1];
 	int i;
 	int j;
-	int y;
 
 	i = 1;
 	j = 0;
-	y = 0;
-	while (i < argc - 1)
+	while (i < argc)
 	{
 		seen[i - 1] = ft_atoi((char *)stack_a.content);
 		i++;
 		stack_a = *stack_a.next;
 	}
-	while (seen[y])
-	{
-		ft_printf("%d\n", seen[y]);
-		y++;
-	}
 	i = 0;
 	while (i < argc - 1)
 	{
 		j = i;
-		while (j < argc - 1)
+		while (j < argc - 2)
 		{
+			// printf("j :%d\nargc :%d\ni :%d\n", j, argc - 1, i);
 			// ft_printf("seen[i] = %d\nseen[j + 1] = %d\n", seen[i], seen[j + 1]);
 			if (seen[i] == seen[j + 1])
 				ft_error();
@@ -149,6 +143,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (1);
 	stack_a = create_stack_a(argv + 1, argc - 1);
+	argc = stack_a->before->index + 1;
 	check_duplicates(*stack_a, argc);
 	// while(stack_a->index != argc - 1)
 	// {
