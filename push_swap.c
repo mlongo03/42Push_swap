@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/26 18:54:41 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/27 15:29:29 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,20 @@ void	ft_free1(char **split)
 
 void	delete_list(t_listlink *stack_a)
 {
-	
+	t_listlink	*tmp;
+	int			*cont;
+
+	while (stack_a->index != 1)
+	{
+		tmp = stack_a;
+		cont = &stack_a->content;
+		stack_a = stack_a->next;
+		free(cont);
+		free(tmp);
+	}
 }
 
-void	ft_error(char **helper, t_listlink stack_a, int flag)
+void	ft_error1(char **helper, t_listlink *stack_a, int flag)
 {
 	if (flag == 1)
 	{
@@ -43,14 +53,14 @@ void	ft_error(char **helper, t_listlink stack_a, int flag)
 	}
 	else
 	{
-
+		delete_list(stack_a);
 		ft_free1(helper);
 	}
 	ft_printf("Error");
 	exit(1);
 }
 
-void	check_duplicates(t_listlink stack_a, int argc)
+void	check_duplicates(t_listlink *stack_a, int argc)
 {
 	int seen[argc - 1];
 	int i;
@@ -60,9 +70,9 @@ void	check_duplicates(t_listlink stack_a, int argc)
 	j = 0;
 	while (i < argc)
 	{
-		seen[i - 1] = ft_atoi((char *)stack_a.content);
+		seen[i - 1] = stack_a->content;
 		i++;
-		stack_a = *stack_a.next;
+		stack_a = stack_a->next;
 	}
 	i = 0;
 	while (i < argc - 1)
@@ -92,7 +102,7 @@ void	check_int(char **helper, t_listlink *stack_a, int flag)
 		{
 			if (helper[i][j] != '-' && helper[i][j] != '+')
 				if (helper[i][j] < 49 || helper[i][j] > 57)
-					ft_error1(helper, stack_a, flag); //free helper o free helper e stack
+					ft_error1(helper, stack_a, flag);
 			j++;
 		}
 		i++;
@@ -112,16 +122,16 @@ t_listlink	*create_stack_a(char **argv, int argc)
 	j = 0;
 	index = 0;
 	helper = ft_split(argv[i++], ' ');
-	check_int(helper, stack_a, 1);
-	stack_a = ft_lstnew(helper[j], j + 1);
+	check_int(helper, NULL, 1);
+	stack_a = ft_lstnew(ft_atoi(helper[j]), j + 1);
 	j++;
 	while (helper[j])
 	{
-		tmp = ft_lstnew(helper[j], j + 1);
+		tmp = ft_lstnew(ft_atoi(helper[j]), j + 1);
 		ft_lstadd_back(&stack_a, tmp);
 		j++;
 	}
-	//free helper
+	ft_free1(helper);
 	index = j;
 	while (i < argc)
 	{
@@ -130,12 +140,12 @@ t_listlink	*create_stack_a(char **argv, int argc)
 		j = 0;
 		while (helper[j])
 		{
-			tmp = ft_lstnew(helper[j], index + 1);
+			tmp = ft_lstnew(ft_atoi(helper[j]), index + 1);
 			ft_lstadd_back(&stack_a, tmp);
 			j++;
 			index++;
 		}
-		//free helper
+		ft_free1(helper);
 	}
 	stack_a->before = ft_lstlast(stack_a);
 	ft_lstlast(stack_a)->next = stack_a;
@@ -150,12 +160,12 @@ int	main(int argc, char **argv)
 		return (1);
 	stack_a = create_stack_a(argv + 1, argc - 1);
 	argc = stack_a->before->index + 1;
-	check_duplicates(*stack_a, argc);
-	// while(stack_a->index != argc - 1)
-	// {
-	// 	printf("%d\n%d\n", *(int *)(stack_a->content), stack_a->index);
-	// 	stack_a = stack_a->next;
-	// }
-	// printf("%d\n%d\n", *(int *)(stack_a->content), stack_a->index);
+	check_duplicates(stack_a, argc);
+	while(stack_a->index != argc - 1)
+	{
+		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+		stack_a = stack_a->next;
+	}
+	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
 	return (0);
 }

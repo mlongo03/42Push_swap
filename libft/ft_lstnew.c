@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:14:32 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/26 15:34:41 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/27 14:55:10 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-t_listlink	*ft_lstnew(void *content, int index)
+t_listlink	*ft_lstnew(int content, int index)
 {
 	t_listlink	*res;
 

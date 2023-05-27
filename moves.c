@@ -3,17 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:44:04 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/26 11:55:35 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/27 13:49:43 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "push_swap.h"
+#include "push_swap.h"
 
 // void	sa(t_listlink *stack_a)
 // {
+// 	t_listlink	*tmp;
+// 	while (stack_a->index != 1)
+// 		stack_a = stack_a->next;
+// 	tmp
+
 // }
 
 // void	sb(t_listlink *stack_b)
