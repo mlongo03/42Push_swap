@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 15:29:34 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:57:36 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int	main(int argc, char **argv)
 		stack_a = stack_a->next;
 	}
 	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
-	rra(stack_a);
+	rra(stack_a, 1);
 	while (stack_a->index != 1)
 		stack_a = stack_a->next;
 	while(stack_a->index != argc - 1)

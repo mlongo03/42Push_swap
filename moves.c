@@ -6,13 +6,13 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:44:04 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 15:33:50 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:58:04 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_listlink *stack_a)
+void	sa(t_listlink *stack_a, int flag)
 {
 	int	tmp1;
 	int	tmp2;
@@ -31,11 +31,12 @@ void	sa(t_listlink *stack_a)
 		while (stack_a->index != 1)
 			stack_a = stack_a->next;
 		stack_a->content = tmp2;
-		write(1, "sa\n", 3);
+		if (flag)
+			write(1, "sa\n", 3);
 	}
 }
 
-void	sb(t_listlink *stack_b)
+void	sb(t_listlink *stack_b, int flag)
 {
 	int	tmp1;
 	int	tmp2;
@@ -54,7 +55,8 @@ void	sb(t_listlink *stack_b)
 		while (stack_b->index != 1)
 			stack_b = stack_b->next;
 		stack_b->content = tmp2;
-		write(1, "sb\n", 3);
+		if (flag)
+			write(1, "sb\n", 3);
 	}
 }
 
@@ -62,18 +64,18 @@ void	ss(t_listlink *stack_a, t_listlink *stack_b)
 {
 	if (stack_a || stack_b)
 	{
-		sa(stack_a);
-		sb(stack_b);
+		sa(stack_a, 0);
+		sb(stack_b, 0);
 		write(1, "ss\n", 3);
 	}
 }
 
-// void	pa(t_listlink *stack_a, t_listlink *stack_b)
+// void	pa(t_listlink *stack_a, t_listlink *stack_b, int flag)
 // {
-// 	if (stack_b)
+// 	if (stack_a)
 // 	{
 // 		while (stack_b->index != 1)
-// 			stack_b = stack_b->next;
+// 			stack_a = stack_b->next;
 
 // 	}
 // }
@@ -82,7 +84,7 @@ void	ss(t_listlink *stack_a, t_listlink *stack_b)
 // {
 // }
 
-void	ra(t_listlink *stack_a)
+void	ra(t_listlink *stack_a, int flag)
 {
 	int			tmpfinal;
 
@@ -96,10 +98,11 @@ void	ra(t_listlink *stack_a)
 		stack_a = stack_a->next;
 	}
 	stack_a->before->content = tmpfinal;
-	write(1, "ra\n", 3);
+	if (flag)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_listlink *stack_b)
+void	rb(t_listlink *stack_b, int flag)
 {
 	int			tmpfinal;
 
@@ -113,17 +116,18 @@ void	rb(t_listlink *stack_b)
 		stack_b = stack_b->next;
 	}
 	stack_b->before->content = tmpfinal;
-	write(1, "rb\n", 3);
+	if (flag)
+		write(1, "rb\n", 3);
 }
 
 void	rr(t_listlink *stack_a, t_listlink *stack_b)
 {
-	rb(stack_b);
-	ra(stack_a);
+	rb(stack_b, 0);
+	ra(stack_a, 0);
 	write(1, "rr\n", 3);
 }
 
-void	rra(t_listlink *stack_a)
+void	rra(t_listlink *stack_a, int flag)
 {
 	int			tmpfinal;
 
@@ -139,10 +143,11 @@ void	rra(t_listlink *stack_a)
 	}
 	stack_a->next->content = stack_a->content;
 	stack_a->content = tmpfinal;
-	write(1, "rra\n", 4);
+	if (flag)
+		write(1, "rra\n", 4);
 }
 
-void	rrb(t_listlink *stack_b)
+void	rrb(t_listlink *stack_b, int flag)
 {
 	int			tmpfinal;
 
@@ -158,12 +163,13 @@ void	rrb(t_listlink *stack_b)
 	}
 	stack_b->next->content = stack_b->content;
 	stack_b->content = tmpfinal;
-	write(1, "rrb\n", 4);
+	if (flag)
+		write(1, "rrb\n", 4);
 }
 
 void	rrr(t_listlink *stack_a, t_listlink *stack_b)
 {
-	rrb(stack_b);
-	rra(stack_a);
+	rrb(stack_b, 0);
+	rra(stack_a, 0);
 	write(1, "rrr\n", 4);
 }
