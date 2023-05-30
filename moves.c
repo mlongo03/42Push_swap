@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:44:04 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 15:58:04 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:05:54 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,71 @@ void	ss(t_listlink *stack_a, t_listlink *stack_b)
 	}
 }
 
-// void	pa(t_listlink *stack_a, t_listlink *stack_b, int flag)
-// {
-// 	if (stack_a)
-// 	{
-// 		while (stack_b->index != 1)
-// 			stack_a = stack_b->next;
+void	pa(t_listlink *stack_a, t_listlink *stack_b, int flag)
+{
+	t_listlink	*helper;
+	t_listlink	*tmp;
 
-// 	}
-// }
+	if (stack_a)
+	{
+		while (stack_a->index != 1)
+			stack_a = stack_a->next;
+		while (stack_b->index != 1)
+			stack_b = stack_b->next;
+		helper = ft_lstnew(0, stack_a->before->index + 1);
+		stack_a->before->next = NULL;
+		stack_a->before = NULL;
+		ft_lstadd_back(&stack_a, helper);
+		stack_a->before = ft_lstlast(stack_a);
+		ft_lstlast(stack_a)->next = stack_a;
+		rra(stack_a, 0);
+		while (stack_a->index != 1)
+			stack_a = stack_a->next;
+		stack_a->content = stack_b->content;
+		rb(stack_b, 0);
+		while (stack_b->index != 1)
+			stack_b = stack_b->next;
+		tmp = stack_b->before;
+		stack_b->before->before->next = stack_b;
+		stack_b->before = stack_b->before->before;
+		free(tmp);
+		if (flag)
+			write(1, "pa\n", 3);
+	}
+}
 
-// void	pb(t_listlink *stack_a, t_listlink *stack_b)
-// {
-// }
+void	pb(t_listlink *stack_a, t_listlink *stack_b, int flag)
+{
+	t_listlink	*helper;
+	t_listlink	*tmp;
+
+	if (stack_b)
+	{
+		while (stack_b->index != 1)
+			stack_b = stack_b->next;
+		while (stack_a->index != 1)
+			stack_a = stack_a->next;
+		helper = ft_lstnew(0, stack_b->before->index + 1);
+		stack_b->before->next = NULL;
+		stack_b->before = NULL;
+		ft_lstadd_back(&stack_b, helper);
+		stack_b->before = ft_lstlast(stack_b);
+		ft_lstlast(stack_b)->next = stack_b;
+		rra(stack_b, 0);
+		while (stack_b->index != 1)
+			stack_b = stack_b->next;
+		stack_b->content = stack_a->content;
+		rb(stack_a, 0);
+		while (stack_a->index != 1)
+			stack_a = stack_a->next;
+		tmp = stack_a->before;
+		stack_a->before->before->next = stack_a;
+		stack_a->before = stack_a->before->before;
+		free(tmp);
+		if (flag)
+			write(1, "pb\n", 3);
+	}
+}
 
 void	ra(t_listlink *stack_a, int flag)
 {

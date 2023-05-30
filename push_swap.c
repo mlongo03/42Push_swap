@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 15:57:36 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:07:43 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,43 @@ int	main(int argc, char **argv)
 	stack_a = create_stack_a(argv + 1, argc - 1);
 	argc = stack_a->before->index + 1;
 	check_duplicates(stack_a, argc);
+	printf("PRINT STACK_A BEFORE\n");
 	while(stack_a->index != argc - 1)
 	{
 		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
 		stack_a = stack_a->next;
 	}
 	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
-	rra(stack_a, 1);
+
+	t_listlink	*stack_b;
+	stack_b = ft_lstnew(90, 1);
+	ft_lstadd_back(&stack_b, ft_lstnew(1000, 2));
+	ft_lstadd_back(&stack_b, ft_lstnew(2000, 3));
+	stack_b->before = ft_lstlast(stack_b);
+	ft_lstlast(stack_b)->next = stack_b;
+	printf("PRINT STACK_B BEFORE\n");
+	while(stack_b->index != 3)
+	{
+		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
+		stack_b = stack_b->next;
+	}
+	printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
+	pb(stack_a, stack_b, 1);
+	argc--;
 	while (stack_a->index != 1)
 		stack_a = stack_a->next;
+	while (stack_b->index != 1)
+		stack_b = stack_b->next;
+	//print stack_b
+	printf("PRINT STACK_B AFTER\n");
+	while(stack_b->index != 4)
+	{
+		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
+		stack_b = stack_b->next;
+	}
+	printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
+	//print stack_a
+	printf("PRINT STACK_A AFTER\n");
 	while(stack_a->index != argc - 1)
 	{
 		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
@@ -177,5 +205,8 @@ int	main(int argc, char **argv)
 	while (stack_a->index != 1)
 		stack_a = stack_a->next;
 	delete_list(stack_a->next);
+	while (stack_b->index != 1)
+		stack_b = stack_b->next;
+	delete_list(stack_b->next);
 	return (0);
 }
