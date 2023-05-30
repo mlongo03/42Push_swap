@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:12:16 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/24 19:21:39 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 11:00:05 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <limits.h>
 #include <stdio.h>
 
-int static	ft_sign(char c)
+static int	ft_sign(char c)
 {
 	return (c == '-' || c == '+');
 }
 
-int static	ft_spaces(char c)
+static int	ft_spaces(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' || c == '\r'
 		|| c == '\v' || c == '\f');

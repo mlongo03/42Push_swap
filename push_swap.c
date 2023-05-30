@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/27 15:29:29 by alessiolong      ###   ########.fr       */
+/*   Updated: 2023/05/30 15:29:34 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ void	ft_free1(char **split)
 void	delete_list(t_listlink *stack_a)
 {
 	t_listlink	*tmp;
-	int			*cont;
 
 	while (stack_a->index != 1)
 	{
 		tmp = stack_a;
-		cont = &stack_a->content;
 		stack_a = stack_a->next;
-		free(cont);
 		free(tmp);
 	}
+	free(stack_a);
 }
 
 void	ft_error1(char **helper, t_listlink *stack_a, int flag)
@@ -101,7 +99,7 @@ void	check_int(char **helper, t_listlink *stack_a, int flag)
 		while (helper[i][j])
 		{
 			if (helper[i][j] != '-' && helper[i][j] != '+')
-				if (helper[i][j] < 49 || helper[i][j] > 57)
+				if (helper[i][j] < 48 || helper[i][j] > 57)
 					ft_error1(helper, stack_a, flag);
 			j++;
 		}
@@ -167,5 +165,17 @@ int	main(int argc, char **argv)
 		stack_a = stack_a->next;
 	}
 	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+	rra(stack_a);
+	while (stack_a->index != 1)
+		stack_a = stack_a->next;
+	while(stack_a->index != argc - 1)
+	{
+		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+		stack_a = stack_a->next;
+	}
+	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+	while (stack_a->index != 1)
+		stack_a = stack_a->next;
+	delete_list(stack_a->next);
 	return (0);
 }
