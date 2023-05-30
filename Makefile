@@ -6,13 +6,13 @@
 #    By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/05/27 16:13:45 by alessiolong      ###   ########.fr        #
+#    Updated: 2023/05/27 17:30:26 by alessiolong      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
 
-OBJS := push_swap.o
+OBJS := push_swap.o moves.o
 
 LIBFT_PATH = ./libft
 
@@ -42,7 +42,7 @@ $(NAME): $(OBJS)
 	@make -C libft
 	@make bonus -C libft
 	@make -C ft_printf
-	@cc $(OBJS) ${LIBFT} $(FT_PRINTF) -o $(NAME)
+	@cc $(OBJS) ${LIBFT} $(FT_PRINTF) -o $(NAME) -fsanitize=address
 	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
 
 clean:
