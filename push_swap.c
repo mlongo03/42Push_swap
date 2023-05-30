@@ -6,66 +6,22 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 17:07:43 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/30 18:58:41 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	ft_error(void)
-{
-	ft_printf("Error");
-	exit(1);
-}
-
-void	ft_free1(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-}
-
-void	delete_list(t_listlink *stack_a)
-{
-	t_listlink	*tmp;
-
-	while (stack_a->index != 1)
-	{
-		tmp = stack_a;
-		stack_a = stack_a->next;
-		free(tmp);
-	}
-	free(stack_a);
-}
-
-void	ft_error1(char **helper, t_listlink *stack_a, int flag)
-{
-	if (flag == 1)
-	{
-		(void)stack_a;
-		ft_free1(helper);
-	}
-	else
-	{
-		delete_list(stack_a);
-		ft_free1(helper);
-	}
-	ft_printf("Error");
-	exit(1);
-}
-
 void	check_duplicates(t_listlink *stack_a, int argc)
 {
-	int seen[argc - 1];
-	int i;
-	int j;
+	int	*seen;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;
+	seen = (int *)malloc((argc - 1) * sizeof(int));
 	while (i < argc)
 	{
 		seen[i - 1] = stack_a->content;
@@ -84,6 +40,7 @@ void	check_duplicates(t_listlink *stack_a, int argc)
 		}
 		i++;
 	}
+	free(seen);
 }
 
 void	check_int(char **helper, t_listlink *stack_a, int flag)
@@ -109,7 +66,7 @@ void	check_int(char **helper, t_listlink *stack_a, int flag)
 
 t_listlink	*create_stack_a(char **argv, int argc)
 {
-	t_listlink 	*stack_a;
+	t_listlink	*stack_a;
 	t_listlink	*tmp;
 	char		**helper;
 	int			i;
@@ -152,7 +109,8 @@ t_listlink	*create_stack_a(char **argv, int argc)
 
 int	main(int argc, char **argv)
 {
-	t_listlink *stack_a;
+	t_listlink	*stack_a;
+	t_listlink	*stack_b;
 
 	if (argc == 1)
 		return (1);
@@ -160,21 +118,19 @@ int	main(int argc, char **argv)
 	argc = stack_a->before->index + 1;
 	check_duplicates(stack_a, argc);
 	printf("PRINT STACK_A BEFORE\n");
-	while(stack_a->index != argc - 1)
+	while (stack_a->index != argc - 1)
 	{
 		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
 		stack_a = stack_a->next;
 	}
 	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
-
-	t_listlink	*stack_b;
 	stack_b = ft_lstnew(90, 1);
 	ft_lstadd_back(&stack_b, ft_lstnew(1000, 2));
 	ft_lstadd_back(&stack_b, ft_lstnew(2000, 3));
 	stack_b->before = ft_lstlast(stack_b);
 	ft_lstlast(stack_b)->next = stack_b;
 	printf("PRINT STACK_B BEFORE\n");
-	while(stack_b->index != 3)
+	while (stack_b->index != 3)
 	{
 		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
 		stack_b = stack_b->next;
@@ -186,17 +142,15 @@ int	main(int argc, char **argv)
 		stack_a = stack_a->next;
 	while (stack_b->index != 1)
 		stack_b = stack_b->next;
-	//print stack_b
 	printf("PRINT STACK_B AFTER\n");
-	while(stack_b->index != 4)
+	while (stack_b->index != 4)
 	{
 		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
 		stack_b = stack_b->next;
 	}
 	printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
-	//print stack_a
 	printf("PRINT STACK_A AFTER\n");
-	while(stack_a->index != argc - 1)
+	while (stack_a->index != argc - 1)
 	{
 		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
 		stack_a = stack_a->next;
