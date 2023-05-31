@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/31 16:48:28 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:01:13 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 	}
 	if (tmp->content == stack_b->content)
 	{
-		
+		//gestire il caso in cui il numero é il nuovo massimo
+		//bisogna mettere il nuovo massimo sopra il minimo dello stack_a
+		//bisogna quindi trovare il minimo
 	}
 	else
 		content = tmp->content;
