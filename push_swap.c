@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/30 18:58:41 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/05/31 16:32:40 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,44 +118,35 @@ int	main(int argc, char **argv)
 	argc = stack_a->before->index + 1;
 	check_duplicates(stack_a, argc);
 	printf("PRINT STACK_A BEFORE\n");
-	while (stack_a->index != argc - 1)
-	{
-		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
-		stack_a = stack_a->next;
-	}
-	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+	print_nodes(stack_a, argc - 1);
 	stack_b = ft_lstnew(90, 1);
-	ft_lstadd_back(&stack_b, ft_lstnew(1000, 2));
-	ft_lstadd_back(&stack_b, ft_lstnew(2000, 3));
-	stack_b->before = ft_lstlast(stack_b);
-	ft_lstlast(stack_b)->next = stack_b;
-	printf("PRINT STACK_B BEFORE\n");
-	while (stack_b->index != 3)
-	{
-		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
-		stack_b = stack_b->next;
-	}
-	printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
-	pb(stack_a, stack_b, 1);
-	argc--;
-	while (stack_a->index != 1)
-		stack_a = stack_a->next;
-	while (stack_b->index != 1)
-		stack_b = stack_b->next;
-	printf("PRINT STACK_B AFTER\n");
-	while (stack_b->index != 4)
-	{
-		printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
-		stack_b = stack_b->next;
-	}
-	printf("content : %d\nindex : %d\n", stack_b->content, stack_b->index);
+	// ft_lstadd_back(&stack_b, ft_lstnew(1000, 2));
+	// ft_lstadd_back(&stack_b, ft_lstnew(2000, 3));
+	// stack_b->before = ft_lstlast(stack_b);
+	// ft_lstlast(stack_b)->next = stack_b;
+	stack_b->before = NULL;
+	stack_b->next = NULL;
+	// printf("PRINT STACK_B BEFORE\n");
+	// print_nodes(stack_b, 1);
+	sorting5(stack_a, stack_b);
+	// pa(stack_a, stack_b, 1);
+	// argc++;
+	// while (stack_a->index != 1)
+	// 	stack_a = stack_a->next;
+	// while (stack_b->index != 1)
+	// 	stack_b = stack_b->next;
+	// printf("PRINT STACK_B AFTER\n");
+	// print_nodes(stack_b, 1);
 	printf("PRINT STACK_A AFTER\n");
-	while (stack_a->index != argc - 1)
-	{
-		printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
-		stack_a = stack_a->next;
-	}
-	printf("content : %d\nindex : %d\n", stack_a->content, stack_a->index);
+	print_nodes(stack_a, 4);
+	// pb(stack_a, stack_b, 1);
+	// argc--;
+	// stack_a = move_on_first(stack_a->next);
+	// stack_b = move_on_first(stack_b);
+	// printf("PRINT STACK_B AFTER\n");
+	// print_nodes(stack_b, 1);
+	// printf("PRINT STACK_A AFTER\n");
+	// print_nodes(stack_a, argc - 1);
 	while (stack_a->index != 1)
 		stack_a = stack_a->next;
 	delete_list(stack_a->next);
