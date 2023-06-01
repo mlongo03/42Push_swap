@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/01 18:03:01 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/01 18:12:56 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,10 +338,8 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 	stack_a = stack_a->next;
 	pb(stack_a, stack_b, 1);
 	stack_a = stack_a->next;
-	nodes_b = move_on_first(stack_b)->before->content;
-	nodes_a = move_on_first(stack_a)->before->content;
-	//risolvere il numero di nodi sono sbagliati
-	printf("%d\n", nodes_b);
+	nodes_b = move_on_first(stack_b)->before->index;
+	nodes_a = move_on_first(stack_a)->before->index;
 	while (stack_a->index != (nodes_a - 3))
 	{
 		stack_b = move_on_first(stack_b);
@@ -353,6 +351,10 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 				num_min++;
 			stack_b = stack_b->next;
 		}
+		if (stack_a->content > stack_b->content)
+			num_max++;
+		else
+			num_min++;
 		if (num_min == nodes_b || num_max == nodes_b)
 		{
 			//siamo nel caso in cui il numero é il nuovo massimo o il nuovo minimo
