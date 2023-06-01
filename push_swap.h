@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:44:11 by mlongo            #+#    #+#             */
-/*   Updated: 2023/05/31 15:53:42 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:46:53 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,27 @@
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 
+typedef struct s_moves
+{
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+	int	sa;
+	int	sb;
+	int	ss;
+}	t_moves;
+
+void		sorting10(t_listlink *stack_a, t_listlink *stack_b);
+void		count_put_max_on_top(t_listlink *stack, t_moves *moves);
+void		count_put_my_node_on_top(t_listlink *stack, t_moves *moves);
+t_listlink	*search_min_than_node(t_listlink *stack_a, t_listlink *stack_b);
+int			count_num_moves(t_moves *moves);
+t_moves		*reset_moves(t_moves *moves);
 void		ft_error(void);
 void		ft_free1(char **split);
 void		delete_list(t_listlink *stack_a);

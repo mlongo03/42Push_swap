@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/01 12:03:45 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:08:03 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ int	main(int argc, char **argv)
 	stack_b->next = NULL;
 	// printf("PRINT STACK_B BEFORE\n");
 	// print_nodes(stack_b, 1);
-	sorting5(stack_a, stack_b);
+	sorting10(stack_a, stack_b);
+	// sorting5(stack_a, stack_b);
 	// pa(stack_a, stack_b, 1);
 	// argc++;
 	// while (stack_a->index != 1)
@@ -137,8 +138,8 @@ int	main(int argc, char **argv)
 	// 	stack_b = stack_b->next;
 	// printf("PRINT STACK_B AFTER\n");
 	// print_nodes(stack_b, 1);
-	printf("PRINT STACK_A AFTER\n");
-	print_nodes(stack_a, 5);
+	// printf("PRINT STACK_A AFTER\n");
+	// print_nodes(stack_a, 5);
 	// pb(stack_a, stack_b, 1);
 	// argc--;
 	// stack_a = move_on_first(stack_a->next);
