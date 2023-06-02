@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/01 18:12:56 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/02 11:32:02 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_listlink	*search_min_than_node(t_listlink *stack_a, t_listlink *stack_b)
 	return (tmp);
 }
 
-void	count_put_my_node_on_top(t_listlink *stack, t_moves *moves)
+void	count_put_my_node_on_top_a(t_listlink *stack, t_moves *moves)
 {
 	int content;
 	int	nodes;
@@ -100,10 +100,47 @@ void	count_put_my_node_on_top(t_listlink *stack, t_moves *moves)
 			rra(stack, 0);
 		}
 	}
-	while (countra)
+	while (countra--)
 		rra(stack, 0);
-	while (countrra)
+	while (countrra--)
 		ra(stack, 0);
+}
+
+void	count_put_my_node_on_top_b(t_listlink *stack, t_moves *moves)
+{
+	int content;
+	int	nodes;
+	int	countra;
+	int	countrra;
+
+	countra = 0;
+	countrra = 0;
+	nodes = move_on_first(stack)->before->content;
+	content = stack->content;
+	if (nodes % 2 != 0)
+		nodes = nodes + 1;
+	if (stack->index <= (nodes / 2))
+	{
+		while (move_on_first(stack)->content != content)
+		{
+			countra++;
+			moves->rb++;
+			rb(stack, 0);
+		}
+	}
+	else
+	{
+		while (move_on_first(stack)->content != content)
+		{
+			countrra++;
+			moves->rrb++;
+			rrb(stack, 0);
+		}
+	}
+	while (countra--)
+		rrb(stack, 0);
+	while (countrra--)
+		rb(stack, 0);
 }
 
 void	count_put_max_on_top(t_listlink *stack, t_moves *moves)
@@ -150,8 +187,8 @@ void	count_put_max_on_top(t_listlink *stack, t_moves *moves)
 		while (move_on_first(stack)->content != content)
 		{
 			countra++;
-			moves->ra++;
-			ra(stack, 0);
+			moves->rb++;
+			rb(stack, 0);
 		}
 	}
 	else
@@ -159,14 +196,14 @@ void	count_put_max_on_top(t_listlink *stack, t_moves *moves)
 		while (move_on_first(stack)->content != content)
 		{
 			countrra++;
-			moves->rra++;
-			rra(stack, 0);
+			moves->rrb++;
+			rrb(stack, 0);
 		}
 	}
-	while (countra)
-		rra(stack, 0);
-	while (countrra)
-		ra(stack, 0);
+	while (countra--)
+		rrb(stack, 0);
+	while (countrra--)
+		rb(stack, 0);
 }
 
 void	sorting3(t_listlink *stack_a)
@@ -340,7 +377,9 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 	stack_a = stack_a->next;
 	nodes_b = move_on_first(stack_b)->before->index;
 	nodes_a = move_on_first(stack_a)->before->index;
-	while (stack_a->index != (nodes_a - 3))
+	printf("nodi a: %d\n", nodes_a);
+	stack_a = move_on_first(stack_a);
+	while (stack_a->index != (nodes_a - 2))
 	{
 		stack_b = move_on_first(stack_b);
 		while(stack_b->index != nodes_b)
@@ -359,22 +398,28 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 		{
 			//siamo nel caso in cui il numero é il nuovo massimo o il nuovo minimo
 			//quindi contare le mosse per metterlo sopra al vecchio massimo
-			count_put_my_node_on_top(stack_a, &moves);
+			count_put_my_node_on_top_a(stack_a, &moves);
 			count_put_max_on_top(stack_b, &moves);
+			printf("BEFORE\nnum mosse ra: %d\nnum mosse rb: %d\n", moves.ra, moves.rb);
+			printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves.rra, moves.rrb);
+			printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves.rr, moves.rrr);
 			while(((moves.ra + moves.rb) % 2 == 0) && (moves.ra != 0 && moves.rb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.ra--;
 				moves.rb--;
 				moves.rr++;
 			}
 			while(((moves.rra + moves.rrb) % 2 == 0) && (moves.rra != 0 && moves.rrb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.rra--;
 				moves.rrb--;
 				moves.rrr++;
 			}
 			while(((moves.sa + moves.sb) % 2 == 0) && (moves.sa != 0 && moves.sb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.sa--;
 				moves.sb--;
 				moves.ss++;
@@ -387,28 +432,38 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 			//siamo nel caso in cui il numero é intermedio
 			//quindi contare le mosse per metterlo sopra al numero minore che gli si avvicina di piú
 			stack_b = search_min_than_node(stack_a, stack_b);
-			count_put_my_node_on_top(stack_b, &moves);
-			count_put_my_node_on_top(stack_a, &moves);
+			count_put_my_node_on_top_b(stack_b, &moves);
+			count_put_my_node_on_top_a(stack_a, &moves);
+			printf("BEFORE\nnum mosse ra: %d\nnum mosse rb: %d\n", moves.ra, moves.rb);
+			printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves.rra, moves.rrb);
+			printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves.rr, moves.rrr);
 			while(((moves.ra + moves.rb) % 2 == 0) && (moves.ra != 0 && moves.rb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.ra--;
 				moves.rb--;
 				moves.rr++;
 			}
 			while(((moves.rra + moves.rrb) % 2 == 0) && (moves.rra != 0 && moves.rrb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.rra--;
 				moves.rrb--;
 				moves.rrr++;
 			}
 			while(((moves.sa + moves.sb) % 2 == 0) && (moves.sa != 0 && moves.sb != 0))
 			{
+				// printf("okkkkkkkkkkkk\n");
 				moves.sa--;
 				moves.sb--;
 				moves.ss++;
 			}
 			moves.pb++;
 		}
+		printf("AFTER\nnum mosse ra: %d\nnum mosse rb: %d\n", moves.ra, moves.rb);
+		printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves.rra, moves.rrb);
+		printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves.rr, moves.rrr);
+		printf("num mosse : %d\n", count_num_moves(&moves));
 		if (count_num_moves(&moves) < countmovesofnode) //attuale minore di precedente
 		{
 			countmovesofnode = count_num_moves(&moves);
