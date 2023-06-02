@@ -6,7 +6,7 @@
 /*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/02 12:17:24 by alessiolong      ###   ########.fr       */
+/*   Updated: 2023/06/03 00:13:41 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,9 @@ int	main(int argc, char **argv)
 	// while (stack_b->index != 1)
 	// 	stack_b = stack_b->next;
 	// printf("PRINT STACK_B AFTER\n");
-	// print_nodes(stack_b, 2);
-	// printf("PRINT STACK_A AFTER\n");
-	// print_nodes(stack_a, 5);
+	// print_nodes(stack_b, 7);
+	printf("PRINT STACK_A AFTER\n");
+	print_nodes(stack_a, argc - 1);
 	// pb(stack_a, stack_b, 1);
 	// argc--;
 	// stack_a = move_on_first(stack_a->next);
