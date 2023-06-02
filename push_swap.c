@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/01 17:08:03 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/02 12:17:24 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	main(int argc, char **argv)
 	// while (stack_b->index != 1)
 	// 	stack_b = stack_b->next;
 	// printf("PRINT STACK_B AFTER\n");
-	// print_nodes(stack_b, 1);
+	// print_nodes(stack_b, 2);
 	// printf("PRINT STACK_A AFTER\n");
 	// print_nodes(stack_a, 5);
 	// pb(stack_a, stack_b, 1);
