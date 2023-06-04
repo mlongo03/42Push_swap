@@ -6,7 +6,7 @@
 /*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/03 00:09:34 by alessiolong      ###   ########.fr       */
+/*   Updated: 2023/06/04 22:59:47 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ int	count_num_moves(t_moves *moves)
 			+ moves->rr + moves->rra + moves->rrb+ moves->rrr
 			+ moves->sa + moves->sb + moves->ss;
 	return (res);
+}
+
+void	copy_moves(t_moves *finalmoves, t_moves *moves)
+{
+	finalmoves->pa = moves->pa;
+	finalmoves->pb = moves->pb;
+	finalmoves->sa = moves->sa;
+	finalmoves->sb = moves->sb;
+	finalmoves->ss = moves->ss;
+	finalmoves->ra = moves->ra;
+	finalmoves->rb = moves->rb;
+	finalmoves->rr = moves->rr;
+	finalmoves->rra = moves->rra;
+	finalmoves->rrb = moves->rrb;
+	finalmoves->rrr = moves->rrr;
+}
+
+void	exec_moves(t_moves finalmoves, t_listlink *stack_a, t_listlink *stack_b)
+{
+	while (finalmoves.rr--)
+		rr(stack_a, stack_b);
+	while (finalmoves.rrr--)
+		rrr(stack_a, stack_b);
 }
 
 t_listlink	*search_min_than_node(t_listlink *stack_a, t_listlink *stack_b)
@@ -165,7 +188,7 @@ void	count_put_my_node_on_top_b(t_listlink *stack, t_moves *moves)
 
 	countra = 0;
 	countrra = 0;
-	nodes = move_on_first(stack)->before->content;
+	nodes = move_on_first(stack)->before->index;
 	content = stack->content;
 	if (nodes % 2 != 0)
 		nodes = nodes + 1;
@@ -312,6 +335,8 @@ void	sorting_push(t_listlink *stack_a, t_listlink *stack_b)
 	}
 	else
 		content = tmp->content;
+	if (nodes % 2 != 0)
+		nodes = nodes + 1;
 	if (tmp->index <= (nodes / 2))
 	{
 		while (move_on_first(stack_a)->content != content)
@@ -334,13 +359,10 @@ void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 
 	content = 0;
 	nodes = 0;
-	pb(stack_a, stack_b, 1);
-	stack_a = stack_a->next;
-	pb(stack_a, stack_b, 1);
-	stack_a = stack_a->next;
 	stack_a = move_on_first(stack_a);
 	stack_b = move_on_first(stack_b);
 	sorting3(stack_a);
+	// print_nodes(stack_a, 3);
 	while (stack_b->next != NULL)
 	{
 		sorting_push(move_on_first(stack_a), move_on_first(stack_b));
@@ -386,7 +408,7 @@ void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 	}
 }
 
-void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, int nodes_b, int *countmovesofnode, t_listlink **mvp_a, t_listlink **mvp_b)
+void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, int nodes_b, int *countmovesofnode, t_listlink **mvp_a, t_listlink **mvp_b, t_moves *finalmoves)
 {
 	int	num_max;
 	int	num_min;
@@ -418,19 +440,19 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 		// printf("BEFORE\nnum mosse ra: %d\nnum mosse rb: %d\n", moves->ra, moves->rb);
 		// printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves->rra, moves->rrb);
 		// printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves->rr, moves->rrr);
-		while(((moves->ra + moves->rb) % 2 == 0) && (moves->ra != 0 && moves->rb != 0))
+		while(moves->ra != 0 && moves->rb != 0)
 		{
 			moves->ra--;
 			moves->rb--;
 			moves->rr++;
 		}
-		while(((moves->rra + moves->rrb) % 2 == 0) && (moves->rra != 0 && moves->rrb != 0))
+		while(moves->rra != 0 && moves->rrb != 0)
 		{
 			moves->rra--;
 			moves->rrb--;
 			moves->rrr++;
 		}
-		while(((moves->sa + moves->sb) % 2 == 0) && (moves->sa != 0 && moves->sb != 0))
+		while(moves->sa != 0 && moves->sb != 0)
 		{
 			moves->sa--;
 			moves->sb--;
@@ -450,19 +472,19 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 		// printf("BEFORE\nnum mosse ra: %d\nnum mosse rb: %d\n", moves->ra, moves->rb);
 		// printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves->rra, moves->rrb);
 		// printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves->rr, moves->rrr);
-		while(((moves->ra + moves->rb) % 2 == 0) && (moves->ra != 0 && moves->rb != 0))
+		while(moves->ra != 0 && moves->rb != 0)
 		{
 			moves->ra--;
 			moves->rb--;
 			moves->rr++;
 		}
-		while(((moves->rra + moves->rrb) % 2 == 0) && (moves->rra != 0 && moves->rrb != 0))
+		while(moves->rra != 0 && moves->rrb != 0)
 		{
 			moves->rra--;
 			moves->rrb--;
 			moves->rrr++;
 		}
-		while(((moves->sa + moves->sb) % 2 == 0) && (moves->sa != 0 && moves->sb != 0))
+		while(moves->sa != 0 && moves->sb != 0)
 		{
 			moves->sa--;
 			moves->sb--;
@@ -474,8 +496,10 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 	// printf("num mosse rra: %d\nnum mosse rrb: %d\n", moves->rra, moves->rrb);
 	// printf("num mosse rr: %d\nnum mosse rrr: %d\n", moves->rr, moves->rrr);
 	// printf("num mosse : %d\n", count_num_moves(moves));
+	// printf("il nodo %d ha mosse %d, ", stack_a->content, count_num_moves(moves));
 	if (count_num_moves(moves) < *countmovesofnode) //attuale minore di precedente
 	{
+		copy_moves(finalmoves, moves);
 		*countmovesofnode = count_num_moves(moves);
 		*mvp_a = stack_a;
 		*mvp_b = stack_b;
@@ -487,14 +511,19 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 {
 	t_moves	moves;
-	int	nodes_b;
+	int	content1;
+	int	content2;
 	int	nodes_a;
+	int	nodes_b;
 	t_listlink	*mvp_a;
 	t_listlink	*mvp_b;
+	t_moves finalmoves;
 	int	countmovesofnode;
 	int	i;
+	int	j;
 
 	i = 2;
+	j = 13;
 	mvp_a = stack_a;
 	mvp_b = stack_b;
 	countmovesofnode = 999999;
@@ -516,12 +545,24 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 		stack_a = move_on_first(stack_a);
 		while (stack_a->index != nodes_a)
 		{
-			count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b);
+			count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b, &finalmoves);
 			stack_a = stack_a->next;
 		}
-		count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b);
+		count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b, &finalmoves);
 		// printf("il mio nodo piú economico é quello con contenuto : %d\nindex : %d\ne ha mosse : %d\n", mvp_a->content, mvp_a->index, countmovesofnode);
 		// printf("il mio nodo da spostare nello stack_b è : %d\nindex : %d\n", mvp_b->content, mvp_b->index);
+		content1 = mvp_a->content;
+		content2 = mvp_b->content;
+		// printf("mosse : %d\n", countmovesofnode);
+		// printf("STACK_A\n");
+		// print_nodes(move_on_first(stack_a), j--);
+		// printf("STACK_B\n");
+		// print_nodes(stack_b, i++);
+		exec_moves(finalmoves, stack_a, stack_b);
+		while (mvp_a->content != content1)
+			mvp_a = mvp_a->next;
+		while (mvp_b->content != content2)
+			mvp_b = mvp_b->next;
 		put_my_node_on_top_a(mvp_a);
 		put_my_node_on_top_b(mvp_b);
 		pb(stack_a, stack_b, 1);
@@ -533,6 +574,7 @@ void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 		nodes_a = move_on_first(stack_a)->before->index;
 		countmovesofnode = 999999;
 	}
+	// print_nodes(stack_b, 17);
 	sorting5(stack_a, stack_b);
 	// printf("STACK_B AFTER\n");
 	// print_nodes(stack_b, i);

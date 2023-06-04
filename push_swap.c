@@ -6,7 +6,7 @@
 /*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/03 00:13:41 by alessiolong      ###   ########.fr       */
+/*   Updated: 2023/06/03 15:07:13 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int	main(int argc, char **argv)
 	stack_a = create_stack_a(argv + 1, argc - 1);
 	argc = stack_a->before->index + 1;
 	check_duplicates(stack_a, argc);
-	printf("PRINT STACK_A BEFORE\n");
-	print_nodes(stack_a, argc - 1);
+	// printf("PRINT STACK_A BEFORE\n");
+	// print_nodes(stack_a, argc - 1);
 	stack_b = ft_lstnew(90, 1);
 	// ft_lstadd_back(&stack_b, ft_lstnew(1000, 2));
 	// ft_lstadd_back(&stack_b, ft_lstnew(2000, 3));
@@ -138,8 +138,8 @@ int	main(int argc, char **argv)
 	// 	stack_b = stack_b->next;
 	// printf("PRINT STACK_B AFTER\n");
 	// print_nodes(stack_b, 7);
-	printf("PRINT STACK_A AFTER\n");
-	print_nodes(stack_a, argc - 1);
+	// printf("PRINT STACK_A AFTER\n");
+	// print_nodes(stack_a, argc - 1);
 	// pb(stack_a, stack_b, 1);
 	// argc--;
 	// stack_a = move_on_first(stack_a->next);
