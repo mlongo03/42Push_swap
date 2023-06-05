@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:44:11 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/02 11:26:14 by alessiolong      ###   ########.fr       */
+/*   Updated: 2023/06/05 15:45:17 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct s_moves
 	int	sb;
 	int	ss;
 }	t_moves;
+
+typedef struct s_utils
+{
+	int nodes_b;
+	int countmovesofnode;
+	struct s_moves moves;
+	struct s_moves finalmoves;
+}	t_utils;
 
 void		sorting10(t_listlink *stack_a, t_listlink *stack_b);
 void		count_put_max_on_top(t_listlink *stack, t_moves *moves);

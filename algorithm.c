@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 14:45:46 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/05 15:50:28 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,7 +404,7 @@ void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 	}
 }
 
-void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, int nodes_b, int *countmovesofnode, t_listlink **mvp_a, t_listlink **mvp_b, t_moves *finalmoves)
+void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_utils *utils)
 {
 	int	num_max;
 	int	num_min;
@@ -412,7 +412,7 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 	num_max = 0;
 	num_min = 0;
 	stack_b = move_on_first(stack_b);
-	while(stack_b->index != nodes_b)
+	while(stack_b->index != utils->nodes_b)
 	{
 		if (stack_a->content > stack_b->content)
 			num_max++;
@@ -424,111 +424,92 @@ void	count_moves_node(t_listlink *stack_a, t_listlink *stack_b, t_moves *moves, 
 		num_max++;
 	else
 		num_min++;
-	if (num_min == nodes_b || num_max == nodes_b)
+	if (num_min == utils->nodes_b || num_max == utils->nodes_b)
 	{
-		count_put_my_node_on_top_a(stack_a, moves);
+		count_put_my_node_on_top_a(stack_a, &utils->moves);
 		stack_b = search_max_node(stack_b);
-		count_put_my_node_on_top_b(stack_b, moves);
-		while(moves->ra != 0 && moves->rb != 0)
+		count_put_my_node_on_top_b(stack_b, &utils->moves);
+		while(utils->moves.ra != 0 && utils->moves.rb != 0)
 		{
-			moves->ra--;
-			moves->rb--;
-			moves->rr++;
+			utils->moves.ra--;
+			utils->moves.rb--;
+			utils->moves.rr++;
 		}
-		while(moves->rra != 0 && moves->rrb != 0)
+		while(utils->moves.rra != 0 && utils->moves.rrb != 0)
 		{
-			moves->rra--;
-			moves->rrb--;
-			moves->rrr++;
+			utils->moves.rra--;
+			utils->moves.rrb--;
+			utils->moves.rrr++;
 		}
-		while(moves->sa != 0 && moves->sb != 0)
+		while(utils->moves.sa != 0 && utils->moves.sb != 0)
 		{
-			moves->sa--;
-			moves->sb--;
-			moves->ss++;
+			utils->moves.sa--;
+			utils->moves.sb--;
+			utils->moves.ss++;
 		}
-		moves->pb++;
+		utils->moves.pb++;
 	}
 	else
 	{
 		stack_b = search_min_than_node(stack_a, stack_b);
-		count_put_my_node_on_top_b(stack_b, moves);
-		count_put_my_node_on_top_a(stack_a, moves);
-		while(moves->ra != 0 && moves->rb != 0)
+		count_put_my_node_on_top_b(stack_b, &utils->moves);
+		count_put_my_node_on_top_a(stack_a, &utils->moves);
+		while(utils->moves.ra != 0 && utils->moves.rb != 0)
 		{
-			moves->ra--;
-			moves->rb--;
-			moves->rr++;
+			utils->moves.ra--;
+			utils->moves.rb--;
+			utils->moves.rr++;
 		}
-		while(moves->rra != 0 && moves->rrb != 0)
+		while(utils->moves.rra != 0 && utils->moves.rrb != 0)
 		{
-			moves->rra--;
-			moves->rrb--;
-			moves->rrr++;
+			utils->moves.rra--;
+			utils->moves.rrb--;
+			utils->moves.rrr++;
 		}
-		while(moves->sa != 0 && moves->sb != 0)
+		while(utils->moves.sa != 0 && utils->moves.sb != 0)
 		{
-			moves->sa--;
-			moves->sb--;
-			moves->ss++;
+			utils->moves.sa--;
+			utils->moves.sb--;
+			utils->moves.ss++;
 		}
-		moves->pb++;
+		utils->moves.pb++;
 	}
-	if (count_num_moves(moves) < *countmovesofnode)
+	if (count_num_moves(&utils->moves) < utils->countmovesofnode)
 	{
-		copy_moves(finalmoves, moves);
-		*countmovesofnode = count_num_moves(moves);
-		*mvp_a = stack_a;
-		*mvp_b = stack_b;
+		copy_moves(&utils->finalmoves, &utils->moves);
+		utils->countmovesofnode = count_num_moves(&utils->moves);
 	}
-	reset_moves(moves);
+	reset_moves(&utils->moves);
 }
 
 void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 {
-	t_moves	moves;
-	// int	content1;
-	// int	content2;
+	t_utils utils;
 	int	nodes_a;
-	int	nodes_b;
-	t_listlink	*mvp_a;
-	t_listlink	*mvp_b;
-	t_moves finalmoves;
-	int	countmovesofnode;
 
-	mvp_a = stack_a;
-	mvp_b = stack_b;
-	countmovesofnode = 999999;
-	reset_moves(&moves);
+	utils.countmovesofnode = 999999;
+	reset_moves(&utils.moves);
 	pb(stack_a, stack_b, 1);
 	stack_a = stack_a->next;
 	pb(stack_a, stack_b, 1);
 	stack_a = stack_a->next;
-	nodes_b = move_on_first(stack_b)->before->index;
+	utils.nodes_b = move_on_first(stack_b)->before->index;
 	nodes_a = move_on_first(stack_a)->before->index;
 	while (nodes_a != 3)
 	{
 		stack_a = move_on_first(stack_a);
 		while (stack_a->index != nodes_a)
 		{
-			count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b, &finalmoves);
+			count_moves_node(stack_a, stack_b, &utils);
 			stack_a = stack_a->next;
 		}
-		count_moves_node(stack_a, stack_b, &moves, nodes_b, &countmovesofnode, &mvp_a, &mvp_b, &finalmoves);
-		// content1 = mvp_a->content;
-		// content2 = mvp_b->content;
-		exec_moves(finalmoves, stack_a, stack_b);
-		// while (mvp_a->content != content1)
-		// 	mvp_a = mvp_a->next;
-		// while (mvp_b->content != content2)
-		// 	mvp_b = mvp_b->next;
-		// put_my_node_on_top_a(mvp_a);
-		// put_my_node_on_top_b(mvp_b);
+		count_moves_node(stack_a, stack_b, &utils);
+		exec_moves(utils.finalmoves, stack_a, stack_b);
 		pb(stack_a, stack_b, 1);
 		stack_a = stack_a->next;
-		nodes_b = move_on_first(stack_b)->before->index;
+		utils.nodes_b = move_on_first(stack_b)->before->index;
 		nodes_a = move_on_first(stack_a)->before->index;
-		countmovesofnode = 999999;
+		utils.countmovesofnode = 999999;
 	}
 	sorting5(stack_a, stack_b);
 }
