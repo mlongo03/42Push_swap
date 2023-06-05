@@ -6,13 +6,13 @@
 #    By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/05/31 15:06:25 by mlongo           ###   ########.fr        #
+#    Updated: 2023/06/05 19:27:24 by mlongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
 
-OBJS := push_swap.o moves.o moves2.o moves3.o utils.o utils2.o algorithm.o
+OBJS := push_swap.o moves.o moves2.o moves3.o utils.o utils2.o algorithm.o algorithm2.o algorithm3.o algorithm4.o algorithm5.o
 
 LIBFT_PATH = ./libft
 

@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 11:19:35 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/05 19:09:57 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	check_duplicates(t_listlink *stack_a, int argc)
 	seen = (int *)malloc((argc - 1) * sizeof(int));
 	while (i < argc)
 	{
-		seen[i - 1] = stack_a->content;
-		i++;
+		seen[i++ - 1] = stack_a->content;
 		stack_a = stack_a->next;
 	}
 	i = 0;
@@ -64,46 +63,47 @@ void	check_int(char **helper, t_listlink *stack_a, int flag)
 	}
 }
 
+void	create_stack_a2(t_listlink **stack_a, char **argv, t_create *utils, int argc)
+{
+	ft_free1(utils->helper);
+	utils->index = utils->j;
+	while (utils->i < argc)
+	{
+		utils->helper = ft_split(argv[utils->i++], ' ');
+		check_int(utils->helper, *stack_a, 2);
+		utils->j = 0;
+		while (utils->helper[utils->j])
+		{
+			utils->tmp = ft_lstnew(ft_atoi(utils->helper[utils->j]), utils->index + 1);
+			ft_lstadd_back(stack_a, utils->tmp);
+			utils->j++;
+			utils->index++;
+		}
+		ft_free1(utils->helper);
+	}
+	(*stack_a)->before = ft_lstlast(*stack_a);
+	ft_lstlast(*stack_a)->next = *stack_a;
+}
+
 t_listlink	*create_stack_a(char **argv, int argc)
 {
 	t_listlink	*stack_a;
-	t_listlink	*tmp;
-	char		**helper;
-	int			i;
-	int			j;
-	int			index;
+	t_create	utils;
 
-	i = 0;
-	j = 0;
-	index = 0;
-	helper = ft_split(argv[i++], ' ');
-	check_int(helper, NULL, 1);
-	stack_a = ft_lstnew(ft_atoi(helper[j]), j + 1);
-	j++;
-	while (helper[j])
+	utils.i = 0;
+	utils.j = 0;
+	utils.index = 0;
+	utils.helper = ft_split(argv[utils.i++], ' ');
+	check_int(utils.helper, NULL, 1);
+	stack_a = ft_lstnew(ft_atoi(utils.helper[utils.j]), utils.j + 1);
+	utils.j++;
+	while (utils.helper[utils.j])
 	{
-		tmp = ft_lstnew(ft_atoi(helper[j]), j + 1);
-		ft_lstadd_back(&stack_a, tmp);
-		j++;
+		utils.tmp = ft_lstnew(ft_atoi(utils.helper[utils.j]), utils.j + 1);
+		ft_lstadd_back(&stack_a, utils.tmp);
+		utils.j++;
 	}
-	ft_free1(helper);
-	index = j;
-	while (i < argc)
-	{
-		helper = ft_split(argv[i++], ' ');
-		check_int(helper, stack_a, 2);
-		j = 0;
-		while (helper[j])
-		{
-			tmp = ft_lstnew(ft_atoi(helper[j]), index + 1);
-			ft_lstadd_back(&stack_a, tmp);
-			j++;
-			index++;
-		}
-		ft_free1(helper);
-	}
-	stack_a->before = ft_lstlast(stack_a);
-	ft_lstlast(stack_a)->next = stack_a;
+	create_stack_a2(&stack_a, argv, &utils, argc);
 	return (stack_a);
 }
 
@@ -120,7 +120,12 @@ int	main(int argc, char **argv)
 	stack_b = ft_lstnew(90, 1);
 	stack_b->before = NULL;
 	stack_b->next = NULL;
-	sorting10(stack_a, stack_b);
+	if (argc - 1 == 2)
+		sorting2(stack_a);
+	else if (argc - 1 == 4)
+		sorting4(stack_a, stack_b);
+	else
+		sorting10(stack_a, stack_b);
 	stack_a = move_on_first(stack_a);
 	delete_list(stack_a->next);
 	stack_b = move_on_first(stack_b);

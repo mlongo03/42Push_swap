@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:44:11 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 15:45:17 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/05 19:26:36 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,39 @@ typedef struct s_utils
 	struct s_moves finalmoves;
 }	t_utils;
 
+typedef struct s_minmax
+{
+	int	num_max;
+	int	num_min;
+}	t_minmax;
+
+typedef struct s_countr
+{
+	int	countra;
+	int	countrra;
+}	t_countr;
+
+typedef struct s_utils2
+{
+	int	content;
+	int	nodes;
+}	t_utils2;
+
+typedef struct s_create
+{
+	char		**helper;
+	int			i;
+	int			j;
+	int			index;
+	t_listlink	*tmp;
+}	t_create;
+
+void		push_min_on_top(t_listlink *stack_a, int nodes, int content, t_listlink *tmp);
+void		calc_min(t_listlink **tmp, t_listlink **stack_a, int *content, int nodes);
+void		sorting_push(t_listlink *stack_a, t_listlink *stack_b);
+void		sorting4(t_listlink *stack_a, t_listlink *stack_b);
+void		sorting2(t_listlink *stack_a);
 void		sorting10(t_listlink *stack_a, t_listlink *stack_b);
-void		count_put_max_on_top(t_listlink *stack, t_moves *moves);
 void		count_put_my_node_on_top_a(t_listlink *stack, t_moves *moves);
 void		count_put_my_node_on_top_b(t_listlink *stack, t_moves *moves);
 t_listlink	*search_min_than_node(t_listlink *stack_a, t_listlink *stack_b);
@@ -70,5 +101,7 @@ t_listlink	*move_on_first(t_listlink *stack);
 void		print_nodes(t_listlink *stack, int j);
 void		sorting3(t_listlink *stack_a);
 void		sorting5(t_listlink *stack_a, t_listlink *stack_b);
+t_moves		*reset_moves(t_moves *moves);
+int			count_num_moves(t_moves *moves);
 
 #endif
