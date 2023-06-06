@@ -6,7 +6,7 @@
 #    By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/06/06 17:04:16 by mlongo           ###   ########.fr        #
+#    Updated: 2023/06/06 17:49:40 by mlongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ clean:
 fclean: clean
 	@make fclean -C libft
 	@make fclean -C ft_printf
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME_BONUS)
 	@echo "$(RED)all deleted!$(DEFAULT)"
 
 re: clean fclean all
