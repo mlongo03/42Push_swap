@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+         #
+#    By: mstocche <mstocche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/06/06 17:49:40 by mlongo           ###   ########.fr        #
+#    Updated: 2023/06/06 18:38:49 by mstocche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS := checker
 
 OBJS := push_swap.o moves.o moves2.o moves3.o utils.o utils2.o algorithm.o algorithm2.o algorithm3.o algorithm4.o algorithm5.o
 
-OBJS_BONUS := ./bonus/checker.o ./bonus/utils.o ./bonus/get_next_line.o ./bonus/get_next_line_utils.o ./bonus/moves.o ./bonus/moves2.o ./bonus/moves3.o
+OBJS_BONUS := ./bonus/checker.o ./bonus/utils.o ./bonus/get_next_line.o ./bonus/get_next_line_utils.o ./bonus/moves.o ./bonus/moves2.o ./bonus/moves3.o ./bonus/checker1.o
 
 LIBFT_PATH = ./libft
 

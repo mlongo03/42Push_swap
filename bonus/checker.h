@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mstocche <mstocche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:39:41 by mstocche          #+#    #+#             */
-/*   Updated: 2023/06/06 17:14:16 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 18:09:33 by mstocche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,10 @@ void		rr(t_listlink *stack_a, t_listlink *stack_b);
 void		rra(t_listlink *stack_a);
 void		rrb(t_listlink *stack_b);
 void		rrr(t_listlink *stack_a, t_listlink *stack_b);
+void		check_duplicates(t_listlink *stack_a, int argc);
+void		check_int(char **helper, t_listlink *stack_a, int flag);
+void		create_stack_a2(t_listlink **stack_a, char **argv,
+				t_create *utils, int argc);
+t_listlink	*create_stack_a(char **argv, int argc);
 
 #endif
