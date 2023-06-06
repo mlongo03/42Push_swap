@@ -6,13 +6,17 @@
 #    By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 16:18:44 by mlongo            #+#    #+#              #
-#    Updated: 2023/06/05 19:27:24 by mlongo           ###   ########.fr        #
+#    Updated: 2023/06/06 17:04:16 by mlongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
 
+NAME_BONUS := checker
+
 OBJS := push_swap.o moves.o moves2.o moves3.o utils.o utils2.o algorithm.o algorithm2.o algorithm3.o algorithm4.o algorithm5.o
+
+OBJS_BONUS := ./bonus/checker.o ./bonus/utils.o ./bonus/get_next_line.o ./bonus/get_next_line_utils.o ./bonus/moves.o ./bonus/moves2.o ./bonus/moves3.o
 
 LIBFT_PATH = ./libft
 
@@ -35,6 +39,8 @@ DEFAULT = \033[0m
 
 all: $(NAME)
 
+bonus: $(NAME_BONUS)
+
 %.o : %.c
 	@cc $(FLAGS) -c $< -o $@
 
@@ -44,6 +50,13 @@ $(NAME): $(OBJS)
 	@make -C ft_printf
 	@cc $(OBJS) ${LIBFT} $(FT_PRINTF) -o $(NAME) -fsanitize=address
 	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
+
+$(NAME_BONUS): $(OBJS_BONUS)
+	@make -C libft
+	@make bonus -C libft
+	@make -C ft_printf
+	@cc $(OBJS_BONUS) ${LIBFT} $(FT_PRINTF) -o $(NAME_BONUS) -fsanitize=address
+	@echo "$(GREEN)$(NAME_BONUS) created!$(DEFAULT)"
 
 clean:
 	@make clean -C libft

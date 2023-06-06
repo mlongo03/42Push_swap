@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/06 11:32:32 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:54:21 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	sorting4(t_listlink *stack_a, t_listlink *stack_b)
 
 	content = 0;
 	nodes = 0;
+	if (move_on_first(stack_a)->before->index == 3)
+	{
+		sorting3(stack_a);
+		return ;
+	}
 	pb(stack_a, stack_b, 1);
 	stack_a = stack_a->next;
 	stack_a = move_on_first(stack_a);
