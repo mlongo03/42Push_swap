@@ -6,13 +6,14 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:17:32 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:21:40 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:10:32 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	count_put_my_node_on_top_a2(t_listlink *stack, t_moves *moves, t_countr *countr, int flag)
+void	count_put_my_node_on_top_a2(t_listlink *stack, t_moves *moves,
+	t_countr *countr, int flag)
 {
 	if (flag == 1)
 	{
@@ -30,7 +31,7 @@ void	count_put_my_node_on_top_a2(t_listlink *stack, t_moves *moves, t_countr *co
 
 void	count_put_my_node_on_top_a(t_listlink *stack, t_moves *moves)
 {
-	int 		content;
+	int			content;
 	int			nodes;
 	t_countr	countr;
 
@@ -52,7 +53,8 @@ void	count_put_my_node_on_top_a(t_listlink *stack, t_moves *moves)
 		ra(stack, 0);
 }
 
-void	count_put_my_node_on_top_b2(t_listlink *stack, t_moves *moves, t_countr *countr, int flag)
+void	count_put_my_node_on_top_b2(t_listlink *stack, t_moves *moves,
+	t_countr *countr, int flag)
 {
 	if (flag == 1)
 	{
@@ -70,7 +72,7 @@ void	count_put_my_node_on_top_b2(t_listlink *stack, t_moves *moves, t_countr *co
 
 void	count_put_my_node_on_top_b(t_listlink *stack, t_moves *moves)
 {
-	int 		content;
+	int			content;
 	int			nodes;
 	t_countr	countr;
 
@@ -92,7 +94,8 @@ void	count_put_my_node_on_top_b(t_listlink *stack, t_moves *moves)
 		rb(stack, 0);
 }
 
-void	calc_min(t_listlink **tmp, t_listlink **stack_a, int *content, int nodes)
+void	calc_min(t_listlink **tmp, t_listlink **stack_a,
+	int *content, int nodes)
 {
 	if ((*stack_a)->content < (*stack_a)->next->content)
 	{

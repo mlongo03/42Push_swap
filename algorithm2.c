@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:17:37 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:19:54 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:30:50 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ t_moves	*reset_moves(t_moves *moves)
 int	count_num_moves(t_moves *moves)
 {
 	int	res;
+
 	res = moves->pa + moves->pb + moves->ra + moves->rb
-			+ moves->rr + moves->rra + moves->rrb+ moves->rrr
-			+ moves->sa + moves->sb + moves->ss;
+		+ moves->rr + moves->rra + moves->rrb + moves->rrr
+		+ moves->sa + moves->sb + moves->ss;
 	return (res);
 }
 
@@ -71,8 +72,8 @@ void	exec_moves(t_moves finalmoves, t_listlink *stack_a, t_listlink *stack_b)
 t_listlink	*search_max_node(t_listlink *stack)
 {
 	t_listlink	*tmp;
-	int	nodes;
-	int	content;
+	int			nodes;
+	int			content;
 
 	content = 0;
 	stack = move_on_first(stack);

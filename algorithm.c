@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:51:14 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:25:37 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:32:32 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	sorting2(t_listlink *stack_a)
 
 void	sorting4(t_listlink *stack_a, t_listlink *stack_b)
 {
-	int	content;
-	int	nodes;
+	int			content;
+	int			nodes;
 	t_listlink	*tmp;
 
 	content = 0;
@@ -45,7 +45,7 @@ void	sorting3(t_listlink *stack_a)
 	stack_a = move_on_first(stack_a);
 	if (stack_a->content < stack_a->next->content)
 	{
-		if(stack_a->next->content > stack_a->next->next->content)
+		if (stack_a->next->content > stack_a->next->next->content)
 		{
 			if (stack_a->content > stack_a->next->next->content)
 				rra(stack_a, 1);
@@ -71,8 +71,8 @@ void	sorting3(t_listlink *stack_a)
 
 void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 {
-	int	content;
-	int	nodes;
+	int			content;
+	int			nodes;
 	t_listlink	*tmp;
 
 	content = 0;
@@ -91,8 +91,8 @@ void	sorting5(t_listlink *stack_a, t_listlink *stack_b)
 
 void	sorting10(t_listlink *stack_a, t_listlink *stack_b)
 {
-	t_utils utils;
-	int	nodes_a;
+	t_utils	utils;
+	int		nodes_a;
 
 	utils.countmovesofnode = 999999;
 	reset_moves(&utils.moves);

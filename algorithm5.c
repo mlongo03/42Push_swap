@@ -6,13 +6,14 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:17:24 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:25:30 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:12:07 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	detect_node_to_push(int *flag, t_listlink **tmp, t_listlink *stack_a, t_listlink *stack_b)
+void	detect_node_to_push(int *flag, t_listlink **tmp,
+	t_listlink *stack_a, t_listlink *stack_b)
 {
 	if (stack_b->content < stack_a->content)
 	{
@@ -24,7 +25,8 @@ void	detect_node_to_push(int *flag, t_listlink **tmp, t_listlink *stack_a, t_lis
 	}
 }
 
-void	sorting_push2(t_listlink **stack_a, t_listlink *stack_b, t_listlink **tmp, t_utils2 *utils)
+void	sorting_push2(t_listlink **stack_a, t_listlink *stack_b,
+	t_listlink **tmp, t_utils2 *utils)
 {
 	int	flag;
 
@@ -79,7 +81,8 @@ void	sorting_push(t_listlink *stack_a, t_listlink *stack_b)
 	stack_b = stack_b->next;
 }
 
-void	push_min_on_top(t_listlink *stack_a, int nodes, int content, t_listlink *tmp)
+void	push_min_on_top(t_listlink *stack_a, int nodes,
+	int content, t_listlink *tmp)
 {
 	if (nodes % 2 != 0)
 		nodes = nodes + 1;
@@ -97,19 +100,19 @@ void	push_min_on_top(t_listlink *stack_a, int nodes, int content, t_listlink *tm
 
 void	handle_double_r(t_utils *utils)
 {
-	while(utils->moves.ra != 0 && utils->moves.rb != 0)
+	while (utils->moves.ra != 0 && utils->moves.rb != 0)
 	{
 		utils->moves.ra--;
 		utils->moves.rb--;
 		utils->moves.rr++;
 	}
-	while(utils->moves.rra != 0 && utils->moves.rrb != 0)
+	while (utils->moves.rra != 0 && utils->moves.rrb != 0)
 	{
 		utils->moves.rra--;
 		utils->moves.rrb--;
 		utils->moves.rrr++;
 	}
-	while(utils->moves.sa != 0 && utils->moves.sb != 0)
+	while (utils->moves.sa != 0 && utils->moves.sb != 0)
 	{
 		utils->moves.sa--;
 		utils->moves.sb--;

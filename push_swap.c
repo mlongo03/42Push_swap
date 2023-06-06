@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:09:57 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:31:38 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	check_int(char **helper, t_listlink *stack_a, int flag)
 	}
 }
 
-void	create_stack_a2(t_listlink **stack_a, char **argv, t_create *utils, int argc)
+void	create_stack_a2(t_listlink **stack_a, char **argv,
+	t_create *utils, int argc)
 {
 	ft_free1(utils->helper);
 	utils->index = utils->j;
@@ -74,7 +75,8 @@ void	create_stack_a2(t_listlink **stack_a, char **argv, t_create *utils, int arg
 		utils->j = 0;
 		while (utils->helper[utils->j])
 		{
-			utils->tmp = ft_lstnew(ft_atoi(utils->helper[utils->j]), utils->index + 1);
+			utils->tmp = ft_lstnew(ft_atoi(utils->helper[utils->j]),
+					utils->index + 1);
 			ft_lstadd_back(stack_a, utils->tmp);
 			utils->j++;
 			utils->index++;

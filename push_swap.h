@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:44:11 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:26:36 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:34:57 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_moves
 
 typedef struct s_utils
 {
-	int nodes_b;
-	int countmovesofnode;
-	struct s_moves moves;
-	struct s_moves finalmoves;
+	int				nodes_b;
+	int				countmovesofnode;
+	struct s_moves	moves;
+	struct s_moves	finalmoves;
 }	t_utils;
 
 typedef struct s_minmax
@@ -70,8 +70,10 @@ typedef struct s_create
 	t_listlink	*tmp;
 }	t_create;
 
-void		push_min_on_top(t_listlink *stack_a, int nodes, int content, t_listlink *tmp);
-void		calc_min(t_listlink **tmp, t_listlink **stack_a, int *content, int nodes);
+void		push_min_on_top(t_listlink *stack_a, int nodes,
+				int content, t_listlink *tmp);
+void		calc_min(t_listlink **tmp, t_listlink **stack_a,
+				int *content, int nodes);
 void		sorting_push(t_listlink *stack_a, t_listlink *stack_b);
 void		sorting4(t_listlink *stack_a, t_listlink *stack_b);
 void		sorting2(t_listlink *stack_a);
@@ -103,5 +105,18 @@ void		sorting3(t_listlink *stack_a);
 void		sorting5(t_listlink *stack_a, t_listlink *stack_b);
 t_moves		*reset_moves(t_moves *moves);
 int			count_num_moves(t_moves *moves);
+void		exec_moves(t_moves finalmoves,
+				t_listlink *stack_a, t_listlink *stack_b);
+void		count_moves_node2(t_listlink *stack_a,
+				t_listlink *stack_b, t_utils *utils, t_minmax minmax);
+void		count_moves_node(t_listlink **stack_a,
+				t_listlink *stack_b, t_utils *utils);
+void		search_max_node2(t_listlink **stack,
+				int *content, t_listlink **tmp);
+t_listlink	*search_max_node(t_listlink *stack);
+void		handle_double_r(t_utils *utils);
+void		copy_moves(t_moves *finalmoves, t_moves *moves);
+void		pa2(t_listlink **stack_a, t_listlink *stack_b, t_listlink **helper);
+void		pb2(t_listlink **stack_b, t_listlink *stack_a, t_listlink **helper);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:17:29 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/05 19:23:57 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/06 11:11:22 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	search_max_node2(t_listlink **stack, int *content, t_listlink **tmp)
 	*stack = (*stack)->next;
 }
 
-void	count_moves_node2(t_listlink *stack_a, t_listlink *stack_b, t_utils *utils, t_minmax minmax)
+void	count_moves_node2(t_listlink *stack_a, t_listlink *stack_b,
+	t_utils *utils, t_minmax minmax)
 {
 	if (minmax.num_min == utils->nodes_b || minmax.num_max == utils->nodes_b)
 	{
@@ -75,14 +76,15 @@ void	count_moves_node2(t_listlink *stack_a, t_listlink *stack_b, t_utils *utils,
 	}
 }
 
-void	count_moves_node(t_listlink **stack_a, t_listlink *stack_b, t_utils *utils)
+void	count_moves_node(t_listlink **stack_a,
+	t_listlink *stack_b, t_utils *utils)
 {
 	t_minmax	minmax;
 
 	minmax.num_max = 0;
 	minmax.num_min = 0;
 	stack_b = move_on_first(stack_b);
-	while(stack_b->index != utils->nodes_b)
+	while (stack_b->index != utils->nodes_b)
 	{
 		if ((*stack_a)->content > stack_b->content)
 			minmax.num_max++;
