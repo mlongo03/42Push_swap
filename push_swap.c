@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:15:50 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/06 16:50:43 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:39:13 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 	t_listlink	*stack_a;
 	t_listlink	*stack_b;
 
-	if (argc < 3)
+	if (argc == 1)
 		return (1);
 	stack_a = create_stack_a(argv + 1, argc - 1);
 	argc = stack_a->before->index + 1;
@@ -122,18 +122,14 @@ int	main(int argc, char **argv)
 	stack_b = ft_lstnew(90, 1);
 	stack_b->before = NULL;
 	stack_b->next = NULL;
+	stack_a = move_on_first(stack_a);
+	check_order(&stack_a, &stack_b);
 	if (argc - 1 == 2)
 		sorting2(stack_a);
 	else if (argc - 1 <= 4)
 		sorting4(stack_a, stack_b);
 	else
 		sorting10(stack_a, stack_b);
-	stack_a = move_on_first(stack_a);
-	delete_list(stack_a->next);
-	stack_b = move_on_first(stack_b);
-	if (stack_b->next == NULL)
-		free(stack_b);
-	else
-		delete_list(stack_b->next);
+	finalfree(&stack_a, &stack_b);
 	return (0);
 }

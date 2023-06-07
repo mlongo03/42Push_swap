@@ -6,7 +6,7 @@
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:44:11 by mlongo            #+#    #+#             */
-/*   Updated: 2023/06/06 11:34:57 by mlongo           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:22:30 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ void		handle_double_r(t_utils *utils);
 void		copy_moves(t_moves *finalmoves, t_moves *moves);
 void		pa2(t_listlink **stack_a, t_listlink *stack_b, t_listlink **helper);
 void		pb2(t_listlink **stack_b, t_listlink *stack_a, t_listlink **helper);
+void		finalfree(t_listlink **stack_a, t_listlink **stack_b);
+void		check_order(t_listlink **stack_a, t_listlink **stack_b);
 
 #endif
